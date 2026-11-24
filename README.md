@@ -2,6 +2,8 @@
 
 [Open the live demo](https://radheshyam1233.github.io/trendproof-lab/)
 
+For the tutorial's hourly fractal sweep and engulfing strategy, see the [MetaTrader 5 Expert Advisor and tester guide](mt5/README.md).
+
 **Research question:** Does a simple moving-average rule beat buy and hold on a later period after both pay trading costs?
 
 ## Run it locally
