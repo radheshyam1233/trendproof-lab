@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="An interactive research lab for testing a moving-average strategy against buy and hold.">
+<title>Trendproof Lab</title>
+<link rel="stylesheet" href="./style.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<header><div class="frame mast"><a href="./">Trendproof<span> / Lab</span></a><a class="source" href="https://github.com/radheshyam1233/trendproof-lab">Source on GitHub</a></div></header>
+<main class="frame">
+<section class="intro">
+<p class="eyebrow">QUANTITATIVE RESEARCH DEMO</p>
+<h1>Does the trend hold up?</h1>
+<p>Test a moving-average rule against buy and hold. Compare the two on later data, with the same assumed cost per trade.</p>
+</section>
+<div class="workspace">
+<aside class="panel settings">
+<h2>Experiment</h2>
+<p id="dataset">Simulated prices · 520 sessions</p>
+<label for="file">Load your own price CSV</label>
+<input id="file" type="file" accept=".csv,text/csv" aria-describedby="format">
+<small id="format">Use date,close in ascending order. Prefer adjusted closes.</small>
+<button id="reset" type="button">Restore sample</button>
+<p id="error" role="alert"></p>
+<label for="period">Evaluation window</label>
+<select id="period"><option value="holdout">Later 40% · holdout</option><option value="development">First 60% · development</option></select>
+<label for="days">Moving average <output id="daysValue"></output></label>
+<input id="days" type="range" min="5" max="60" step="5" value="20">
+<label for="cost">Cost per buy or sell <output id="costValue"></output></label>
+<input id="cost" type="range" min="0" max="100" step="5" value="10">
+</aside>
+<section class="panel results" aria-labelledby="result-title">
+<div class="result-head"><div><p class="eyebrow" id="range"></p><h2 id="result-title">Growth of 100</h2></div><button id="download" type="button">Export audit CSV</button></div>
+<div class="legend"><span class="net">Strategy after costs</span><span class="gross">Strategy before costs</span><span class="benchmark">Buy and hold after costs</span></div>
+<canvas id="chart" role="img" aria-label="Growth of 100 chart"></canvas>
+<p class="finding" id="finding" aria-live="polite"></p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Metric</th><th scope="col">Strategy</th><th scope="col">Buy and hold</th></tr></thead><tbody id="stats"></tbody></table></div>
+</section>
+</div>
+<section class="panel methods"><h2>How the test works</h2><div>
+<p><strong>Signal and execution.</strong> If yesterday's close is above its moving average, hold the asset. Otherwise, hold cash. Change the position at today's close and measure the next close-to-close return.</p>
+<p><strong>Fair comparison.</strong> Both start with 100 and pay the same fee per buy or sell, including the closing trade. The holdout starts in cash and uses earlier prices to warm up the signal.</p>
+<p><strong>What this can show.</strong> The sample is simulated to illustrate research mechanics. Changing settings after seeing the holdout makes it exploratory. Save a fresh period for the next genuine test.</p>
+</div></section>
+</main>
+</body></html>
